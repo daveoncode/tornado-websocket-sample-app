@@ -1,13 +1,14 @@
 from __future__ import unicode_literals
-from APIHandler import APIHandler
+import os
 
+from tornado.ioloop import IOLoop
+from tornado.web import StaticFileHandler
+
+from APIHandler import APIHandler
 from ClientSocketHandler import ClientSocketHandler
 from HomePageHandler import HomePageHandler
 from HostSocketHandler import HostSocketHandler
 from MyApp import MyApp
-from tornado.ioloop import IOLoop
-from tornado.web import StaticFileHandler
-import os
 
 
 def main():
@@ -22,9 +23,8 @@ def main():
     ]
     settings = dict(static_path=os.path.join(os.path.dirname(__file__), 'static'))
     app = MyApp(handlers, **settings)
-    app.listen(5000)
+    app.listen(int(os.environ.get('PORT', 5000)))
     IOLoop.instance().start()
 
-
-if __name__ == '__main__':
-    main()
+    if __name__ == '__main__':
+        main()
