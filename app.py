@@ -21,7 +21,7 @@ def main():
     ]
     settings = dict(static_path=os.path.join(os.path.dirname(__file__), 'static'))
     app = MyApp(handlers, **settings)
-    app.listen(8080)
+    app.listen(5000)
     IOLoop.instance().start()
 
 
