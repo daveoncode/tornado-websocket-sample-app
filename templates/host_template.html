@@ -1,0 +1,17 @@
+<div ng-init="token='{{ token }}'">
+    <div ng-controller="HostController">
+        <div class="jumbotron" ng-show="!tokenAccepted" ng-cloak>
+            <div>
+                <h1>Hello!</h1>
+
+                <h2>
+                    Insert the code <span class="label label-success">{{ token }}</span>
+                    in your mobile device to control this web app!
+                </h2>
+            </div>
+        </div>
+        <div ng-show="tokenAccepted" ng-cloak>
+            <div ng-view class="animated fadeIn"></div>
+        </div>
+    </div>
+</div>

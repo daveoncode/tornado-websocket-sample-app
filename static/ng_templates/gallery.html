@@ -1,0 +1,21 @@
+<div class="alert alert-info text-center" ng-if="!images">
+    Loading data from Flickr...
+</div>
+<h1>
+    Welcome to the actual app!
+</h1>
+<div class="alert alert-info">
+    <h3>
+        <strong>SWIPE LEFT/RIGHT</strong> to move among images,
+        <strong>TAP</strong> to zoom, <strong>PINCH IN/OUT</strong> to enter/leave full screen mode ;)
+    </h3>
+</div>
+<ul class="list-inline" ng-if="images">
+    <li ng-repeat="img in images">
+        <img ng-src="{{ img.thumb }}"
+             width="160"
+             height="160"
+             class="img-thumbnail animated bounceIn"
+             ng-class="{'active': currentFocus == $index}" />
+    </li>
+</ul>

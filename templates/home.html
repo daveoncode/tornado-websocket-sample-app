@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+        <title>Tornado + websockets Demo</title>
+        <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1" />
+        <link rel="stylesheet" href="{{ static_url('bower_components/bootstrap/dist/css/bootstrap.min.css') }}" />
+        <link rel="stylesheet" href="{{ static_url('bower_components/animate.css/animate.min.css') }}" />
+        <style type="text/css">
+            .ng-hide, .ng-cloak {
+                display: none !important;
+            }
+
+            body, html {
+                width: 100%;
+                height: 100%;
+            }
+
+            img {
+                margin: 10px;
+            }
+
+            img.active {
+                background: lime;
+                border-color: green;
+            }
+        </style>
+    </head>
+    <body ng-app="app">
+        <div class="container">
+
+            {% if is_client %}
+                {% include 'client_template.html' %}
+            {% else %}
+                {% include 'host_template.html' %}
+            {% end %}
+
+            <div class="panel panel-warning">
+                <div class="panel-heading">
+                    <strong>Debug console</strong> (for nerds like you ...and me of course)
+                </div>
+                <div class="panel-body" id="debug-console"></div>
+            </div>
+
+            <div class="well text-center">
+                This is just an experiment developed by <a href="http://www.daveoncode.com">Davide Zanotti</a>
+                (<a href="https://twitter.com/daveoncode">@daveoncode</a>) in order to test
+                <a href="http://tornadoweb.org">Tornado</a> + JavaScript
+                WebSockets.
+            </div>
+
+        </div>
+
+        <script type="text/javascript" src="{{ static_url('bower_components/angular/angular.min.js') }}"></script>
+        {% if is_client %}
+            <script type="text/javascript" src="{{ static_url('bower_components/hammer.js/hammer.min.js') }}"></script>
+            <script type="text/javascript" src="{{ static_url('js/client_app.js') }}"></script>
+        {% else %}
+            <script type="text/javascript" src="{{ static_url('bower_components/angular-route/angular-route.min.js') }}"></script>
+            <script type="text/javascript" src="{{ static_url('bower_components/angular-resource/angular-resource.min.js') }}"></script>
+            <script type="text/javascript" src="{{ static_url('js/host_app.js') }}"></script>
+        {% end %}
+    </body>
+</html>

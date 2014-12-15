@@ -1,0 +1,42 @@
+<div class="jumbotron">
+    <div ng-show="!tokenAccepted" ng-cloak>
+        <h1>Hello!</h1>
+        <h4>
+            Enter the code displayed on your desktop browser, then click "check" to start
+            controlling the app using your <strong>{{ device }}</strong>.
+        </h4>
+
+        <form name="tokenForm"
+              ng-controller="TokenFormController"
+              ng-submit="validateToken()"
+              novalidate>
+            <div class="form-group" ng-class="{'has-error': shouldDisplayErrorMessage()}">
+                <input type="text"
+                       name="token"
+                       class="form-control"
+                       placeholder="Token"
+                       ng-model="token"
+                       required
+                       maxlength="5"
+                       minlength="5"
+                       ng-minlength="5"
+                       ng-maxlength="5" />
+                <span class="help-block" ng-show="invalidSubmit && tokenForm.token.$invalid && !invalidToken">
+                    Enter a valid token (it MUST be a 5 letters string)
+                </span>
+                <span class="help-block" ng-show="invalidToken">
+                    The token you entered is invalid. Enter a valid token (tip: token is case sensitive!).
+                </span>
+            </div>
+            <button type="submit" class="btn btn-primary btn-lg">Check</button>
+        </form>
+    </div>
+    <div ng-show="tokenAccepted" ng-cloak>
+        <h1>Congratulation!</h1>
+
+        <div class="alert alert-success">
+            Your device has been accepted by the server, you can take control of the app
+            by using gestures on your <strong>{{device}}</strong>.
+        </div>
+    </div>
+</div>
