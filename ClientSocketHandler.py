@@ -1,6 +1,8 @@
 from __future__ import unicode_literals
-from MyApp import MyApp
+
 from tornado.websocket import WebSocketHandler
+
+from MyApp import MyApp
 
 
 class ClientSocketHandler(WebSocketHandler):
@@ -10,10 +12,10 @@ class ClientSocketHandler(WebSocketHandler):
         super(ClientSocketHandler, self).__init__(application, request, **kwargs)
         self.token = request.arguments.get('token', []).pop()
         self.host = self.get_host_for_token(self.token)
-        print 'Received token is: {}'.format(self.token)
+        print 'ClientSocketHandler - Received token is: {}'.format(self.token)
 
     def data_received(self, chunk):
-        print 'ClientSocketHandler data_received()'
+        print 'ClientSocketHandler - data_received()'
 
     @staticmethod
     def get_host_for_token(token):
@@ -24,7 +26,7 @@ class ClientSocketHandler(WebSocketHandler):
 
     def get(self, *args, **kwargs):
         super(ClientSocketHandler, self).get(*args, **kwargs)
-        print 'ClientSocketHandler get()'
+        print 'ClientSocketHandler - get()'
         if self.host:
             print 'sending token back to the [ host ] confirm its validity...'
             self.host.write_message(self.token)
@@ -35,10 +37,9 @@ class ClientSocketHandler(WebSocketHandler):
             self.close(401, 'Invalid token ({})'.format(self.token))
 
     def on_message(self, message):
-        print 'ClientSocketHandler on_message()'
-        print 'message received: {}'.format(message)
+        print 'ClientSocketHandler - Message received: {}'.format(message)
         if message in self.gestures:
-            print 'Supported gesture... react!'
+            print 'ClientSocketHandler - Supported gesture... react!'
             self.host.write_message(message)
         else:
-            print 'Unsupported gesture'
+            print 'ClientSocketHandler - Unsupported gesture'
