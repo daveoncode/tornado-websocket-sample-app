@@ -14,6 +14,7 @@ def main():
     print 'setting up tornado...'
     handlers = [
         (r'/', HomePageHandler),
+        (r'/favicon.ico', StaticFileHandler),
         (r'/ws/host/', HostSocketHandler),
         (r'/ws/client/', ClientSocketHandler),
         (r'/static/(.*)', StaticFileHandler),
