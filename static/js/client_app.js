@@ -15,7 +15,8 @@ angular.module('app', []).
             else {
                 $scope.invalidSubmit = false;
 
-                var socketURL = 'ws://' + location.host + '/ws/client/?token=' + $scope.token;
+                var protocol = location.protocol.indexOf('https') !== -1 ? 'wss://' : 'ws://';
+                var socketURL = protocol + location.host + '/ws/client/?token=' + $scope.token;
                 var socket = new WebSocket(socketURL);
 
                 socket.onopen = function(event) {

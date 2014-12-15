@@ -16,7 +16,8 @@ angular.module('app', ['ngRoute', 'ngResource']).
     controller('HostController', function($scope, $resource, $location) {
 
         var debug = document.getElementById('debug-console');
-        var socketURL = 'ws://' + location.host + '/ws/host/?token=' + $scope.token;
+        var protocol = location.protocol.indexOf('https') !== -1 ? 'wss://' : 'ws://';
+        var socketURL = protocol + location.host + '/ws/host/?token=' + $scope.token;
         var socket = new WebSocket(socketURL);
 
         $scope.currentFocus = 0;
