@@ -26,5 +26,6 @@ def main():
     app.listen(int(os.environ.get('PORT', 5000)))
     IOLoop.instance().start()
 
-    if __name__ == '__main__':
-        main()
+
+if __name__ == '__main__':
+    main()
